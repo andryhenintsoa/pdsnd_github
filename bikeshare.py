@@ -9,7 +9,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-
+DASH_SEPARATOR_COUNT = 40
 
 
 
@@ -44,7 +44,7 @@ def get_filters():
         day = input('\nName of the day of week to filter by, or "all" to apply no day filter\n').lower()
 
 
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
     return city, month, day
 
 
@@ -107,7 +107,7 @@ def time_stats(df):
     print('Most common common start hour : {}'.format(start_hour))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
 
 
 
@@ -133,7 +133,7 @@ def station_stats(df):
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
 
 
 
@@ -154,7 +154,7 @@ def trip_duration_stats(df):
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
 
 
 
@@ -184,7 +184,7 @@ def user_stats(df):
         print('Most common year of birth : {}'.format(df['Birth Year'].mode()[0]))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
 
 
 
