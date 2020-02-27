@@ -9,7 +9,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-
+DASH_SEPARATOR_COUNT = 40
 
 
 
@@ -22,30 +22,28 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    allowed_city = ['chicago','new york city', 'washington']
     city = '';
-    
-    while city not in allowed_city:
+
+    while city not in CITY_DATA:
         city = input('\nName of the city to analyze? Chicago, New York City or Washington?\n').lower()
 
     # get user input for month (all, january, february, ... , june)
     allowed_month = ['all','january', 'february', 'march', 'april', 'may', 'june']
     month = '';
-    
+
     while month not in allowed_month:
         month = input('\nName of the month to filter by, or "all" to apply no month filter\n').lower()
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     allowed_day = ['all','monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     day = '';
-    
+
     while day not in allowed_day:
         day = input('\nName of the day of week to filter by, or "all" to apply no day filter\n').lower()
 
 
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
     return city, month, day
 
 
@@ -63,7 +61,7 @@ def load_data(city, month, day):
     """
     # load data file into a dataframe
     df = pd.read_csv('./{}'.format(CITY_DATA[city]))
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -75,7 +73,7 @@ def load_data(city, month, day):
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
-    
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -83,7 +81,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-    
+
     return df
 
 
@@ -108,7 +106,7 @@ def time_stats(df):
     print('Most common common start hour : {}'.format(start_hour))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
 
 
 
@@ -134,7 +132,7 @@ def station_stats(df):
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
 
 
 
@@ -155,7 +153,7 @@ def trip_duration_stats(df):
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
 
 
 
@@ -183,28 +181,29 @@ def user_stats(df):
         print('Earliest year of birth : {}'.format(df['Birth Year'].min()))
         print('Most recent year of birth : {}'.format(df['Birth Year'].max()))
         print('Most common year of birth : {}'.format(df['Birth Year'].mode()[0]))
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-'*DASH_SEPARATOR_COUNT)
 
 
 
 
 
 def main():
+    print('Hello! Let\'s explore some US bikeshare data!')
     while True:
         city, month, day = get_filters()
-        
+
         df = load_data(city, month, day)
 
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
+
         length = len(df.index)
         n = 0;
-        
+
         dispay_raw_data = 'yes'
         while dispay_raw_data != 'no' and n < length:
             dispay_raw_data = input('\nDisplay raw data? (Yes/No)\n').lower()
@@ -219,6 +218,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
