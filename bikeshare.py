@@ -23,10 +23,9 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    allowed_city = ['chicago','new york city', 'washington']
     city = '';
 
-    while city not in allowed_city:
+    while city not in CITY_DATA:
         city = input('\nName of the city to analyze? Chicago, New York City or Washington?\n').lower()
 
     # get user input for month (all, january, february, ... , june)
